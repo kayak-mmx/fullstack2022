@@ -6,7 +6,6 @@ const Button = (props) => (
 
 const Statistics = (props) => (
   <div>
-    <h1>Statistics</h1>
     <p>Good {props.good}</p>
     <p>Neutral {props.neutral}</p>
     <p>Bad {props.bad}</p>
@@ -42,15 +41,33 @@ const App = () => {
     }        
   }
 
-  return (
-    <div>
-      <h1>Please give feedback</h1>
-      <Button handleClick={() => setFeedback("good", good + 1)} text="Good" />
-      <Button handleClick={() => setFeedback("neutral", neutral + 1)} text="Neutral" />
-      <Button handleClick={() => setFeedback("bad", bad + 1)} text="Bad" />
-      <Statistics good={good} neutral={neutral} bad={bad} totalFeedback={totalFeedback} average={average} positive={positive} />
-    </div>
-  );
+  if (totalFeedback > 0)
+  {
+    return (
+      <div>
+        <h1>Please give feedback</h1>
+        <Button handleClick={() => setFeedback("good", good + 1)} text="Good" />
+        <Button handleClick={() => setFeedback("neutral", neutral + 1)} text="Neutral" />
+        <Button handleClick={() => setFeedback("bad", bad + 1)} text="Bad" />
+        <h1>Statistics</h1>
+        <Statistics good={good} neutral={neutral} bad={bad} totalFeedback={totalFeedback} average={average} positive={positive} />
+      </div>
+    );  
+  }
+  else
+  {
+    return (
+      <div>
+        <h1>Please give feedback</h1>
+        <Button handleClick={() => setFeedback("good", good + 1)} text="Good" />
+        <Button handleClick={() => setFeedback("neutral", neutral + 1)} text="Neutral" />
+        <Button handleClick={() => setFeedback("bad", bad + 1)} text="Bad" />
+        <h1>Statistics</h1>
+        <h3>No feedback given</h3>
+      </div>
+    );  
+
+  }
 }
 
 export default App;
