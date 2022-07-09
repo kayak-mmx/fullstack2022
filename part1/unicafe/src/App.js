@@ -4,15 +4,8 @@ const Button = (props) => (
   <button onClick={props.handleClick}>{props.text}</button>
 )
 
-const Statistics = (props) => (
-  <div>
-    <p>Good {props.good}</p>
-    <p>Neutral {props.neutral}</p>
-    <p>Bad {props.bad}</p>
-    <p>All {props.totalFeedback}</p>
-    <p>Average {props.average}</p>
-    <p>Positive {props.positive} %</p>
-  </div>
+const StatisticLine = (props) => (
+  <p>{props.statisticName} {props.statisticValue}</p>
 )
 
 const App = () => {
@@ -50,7 +43,12 @@ const App = () => {
         <Button handleClick={() => setFeedback("neutral", neutral + 1)} text="Neutral" />
         <Button handleClick={() => setFeedback("bad", bad + 1)} text="Bad" />
         <h1>Statistics</h1>
-        <Statistics good={good} neutral={neutral} bad={bad} totalFeedback={totalFeedback} average={average} positive={positive} />
+        <StatisticLine statisticName={"Good"} statisticValue={good} />
+        <StatisticLine statisticName={"Neutral"} statisticValue={neutral} />
+        <StatisticLine statisticName={"Bad"} statisticValue={bad} />
+        <StatisticLine statisticName={"All"} statisticValue={totalFeedback} />
+        <StatisticLine statisticName={"Average"} statisticValue={average} />
+        <StatisticLine statisticName={"Positive"} statisticValue={positive} />
       </div>
     );  
   }
