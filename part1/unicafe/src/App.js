@@ -5,7 +5,11 @@ const Button = (props) => (
 )
 
 const StatisticLine = (props) => (
-  <p>{props.statisticName} {props.statisticValue}</p>
+  //<p>{props.statisticName} {props.statisticValue}</p>
+  <tr>
+    <td>{props.statisticName}</td>
+    <td>{props.statisticValue}</td>
+  </tr>
 )
 
 const App = () => {
@@ -43,12 +47,16 @@ const App = () => {
         <Button handleClick={() => setFeedback("neutral", neutral + 1)} text="Neutral" />
         <Button handleClick={() => setFeedback("bad", bad + 1)} text="Bad" />
         <h1>Statistics</h1>
-        <StatisticLine statisticName={"Good"} statisticValue={good} />
-        <StatisticLine statisticName={"Neutral"} statisticValue={neutral} />
-        <StatisticLine statisticName={"Bad"} statisticValue={bad} />
-        <StatisticLine statisticName={"All"} statisticValue={totalFeedback} />
-        <StatisticLine statisticName={"Average"} statisticValue={average} />
-        <StatisticLine statisticName={"Positive"} statisticValue={positive} />
+        <table>
+          <tbody>
+            <StatisticLine statisticName={"Good"} statisticValue={good} />
+            <StatisticLine statisticName={"Neutral"} statisticValue={neutral} />
+            <StatisticLine statisticName={"Bad"} statisticValue={bad} />
+            <StatisticLine statisticName={"All"} statisticValue={totalFeedback} />
+            <StatisticLine statisticName={"Average"} statisticValue={average} />
+            <StatisticLine statisticName={"Positive"} statisticValue={positive} />
+          </tbody>
+        </table>
       </div>
     );  
   }
