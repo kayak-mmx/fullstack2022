@@ -11,20 +11,24 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  let totalFeedback = good + neutral + bad
+  let average = (totalFeedback === 0)? 0: (good - bad)/totalFeedback
+  let positive = (totalFeedback === 0)? 0: good/totalFeedback
+
   const setFeedback = (option, newValue) => {
-      //console.log('option', option)
-      if (option === "good")
-      {
-        setGood(newValue)
-      }
-      else if (option === "neutral")
-      {
-        setNeutral(newValue)
-      }
-      else if (option === "bad")
-      {
-        setBad(newValue)
-      }  
+    //console.log('option', option)
+    if (option === "good")
+    {
+      setGood(newValue)
+    }
+    else if (option === "neutral")
+    {
+      setNeutral(newValue)
+    }
+    else if (option === "bad")
+    {
+      setBad(newValue)
+    }        
   }
 
   return (
@@ -37,6 +41,9 @@ const App = () => {
       <p>Good {good}</p>
       <p>Neutral {neutral}</p>
       <p>Bad {bad}</p>
+      <p>All {totalFeedback}</p>
+      <p>Average {average}</p>
+      <p>Positive {positive}</p>
     </div>
   );
 }
