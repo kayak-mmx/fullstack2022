@@ -30,13 +30,19 @@ function App() {
 
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(initializeArray)
+  const [mostVoted, setMostVoted] = useState(0)
 
   const setNewAnecdote = newIndex => {
     setSelected(newIndex)
+
+    setMostVoted(() => {
+      const copy = [...votes]
+      let highestValue = Math.max(...copy)
+      return (copy.indexOf(highestValue) === -1) ? 0 : copy.indexOf(highestValue)
+    })
   }
 
   const setTotalVotes = index => {
-    console.log('index to increment %d', index)
     setVotes(copy => {
       return copy.map((item, j) => {
         return j === index ? item + 1 : item
@@ -46,6 +52,7 @@ function App() {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes.</p>
       <ButtonVote handleClick={() => {
@@ -57,6 +64,9 @@ function App() {
         setNewAnecdote(next)
       }} 
       text="next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVoted]}</p>
+      <p>has {votes[mostVoted]} votes.</p>
     </div>
   );
 }
