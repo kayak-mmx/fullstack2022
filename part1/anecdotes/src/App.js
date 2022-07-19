@@ -4,6 +4,19 @@ const Button = (props) => (
   <button onClick={props.handleClick}>{props.text}</button>
 )
 
+const ButtonVote = (props) => (
+  <button onClick={props.handleClick}>{props.text}</button>
+) 
+
+function initializeArray () {
+  const initialPoints = []
+  for (let i = 0; i < 7; i++) {
+    initialPoints.push(0)
+  }
+  
+  return initialPoints
+}
+
 function App() {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -16,18 +29,32 @@ function App() {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(initializeArray)
 
   const setNewAnecdote = newIndex => {
     setSelected(newIndex)
   }
 
+  const setTotalVotes = index => {
+    console.log('index to increment %d', index)
+    setVotes(copy => {
+      return copy.map((item, j) => {
+        return j === index ? item + 1 : item
+      })
+    })
+  }
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes.</p>
+      <ButtonVote handleClick={() => {
+        setTotalVotes(selected)
+      }} 
+      text="Vote" />
       <Button handleClick={() => {
         let next = Math.floor(Math.random() * anecdotes.length)
         setNewAnecdote(next)
-        console.log(next)
       }} 
       text="next anecdote" />
     </div>
